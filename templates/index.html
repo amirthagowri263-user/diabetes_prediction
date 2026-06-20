@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Prediction System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+            overflow-x: hidden;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px;
+            gap: 40px;
+        }
+
+        /* Left hero section */
+        .hero {
+            width: 350px;
+            text-align: center;
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .hero h3 {
+            margin-top: 15px;
+            color: #333;
+        }
+
+        /* Spinning globe */
+        .globe {
+            margin: 20px auto;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+            background-size: cover;
+            animation: spin 8s linear infinite;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Form box */
+        .box {
+            width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #222;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 7px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0072ff;
+            box-shadow: 0 0 5px #0072ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0072ff;
+        }
+
+        /* Floating disease icons */
+        .bg-icons img {
+            position: absolute;
+            width: 60px;
+            opacity: 0.2;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .i1 { top: 120px; left: 20px; }
+        .i2 { top: 300px; right: 40px; }
+        .i3 { bottom: 100px; left: 60px; }
+
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    🏥 Diabetes Prediction System AI
+</div>
+
+<!-- Floating medical icons -->
+<div class="bg-icons">
+    <img class="i1" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png">
+    <img class="i2" src="https://cdn-icons-png.flaticon.com/512/4320/4320337.png">
+    <img class="i3" src="https://cdn-icons-png.flaticon.com/512/2913/2913465.png">
+</div>
+
+<div class="container">
+
+    <!-- Doctor + Globe -->
+    <div class="hero">
+        <img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f"
+             alt="Doctor Image">
+        <h3>AI Powered Health Prediction</h3>
+        <div class="globe"></div>
+        <p>Monitoring diseases across the world 🌍</p>
+    </div>
+
+    <!-- Form -->
+    <div class="box">
+        <h2>Enter Patient Details</h2>
+
+        <form action="/predict" method="post">
+
+            <input type="number" step="any" name="pregnancies" placeholder="Pregnancies" required>
+            <input type="number" step="any" name="glucose" placeholder="Glucose" required>
+            <input type="number" step="any" name="bloodpressure" placeholder="Blood Pressure" required>
+            <input type="number" step="any" name="skinthickness" placeholder="Skin Thickness" required>
+            <input type="number" step="any" name="insulin" placeholder="Insulin" required>
+            <input type="number" step="any" name="bmi" placeholder="BMI" required>
+            <input type="number" step="any" name="dpf" placeholder="Diabetes Pedigree Function" required>
+            <input type="number" step="any" name="age" placeholder="Age" required>
+
+            <button type="submit">Predict Now</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
